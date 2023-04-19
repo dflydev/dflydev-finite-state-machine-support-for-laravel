@@ -4,10 +4,9 @@ declare(strict_types=1);
 
 namespace Dflydev\FiniteStateMachine\SupportForLaravel;
 
-use Dflydev\FiniteStateMachine\Contracts\FiniteStateMachine;
+use Dflydev\FiniteStateMachine\FiniteStateMachine;
 use Dflydev\FiniteStateMachine\FiniteStateMachineFactory;
 use Throwable;
-use Whrc\FiniteStateMachine\UnableToChangeState;
 
 trait SingleFiniteStateMachineBehavior
 {
