@@ -1,25 +1,38 @@
 {
     "name": "dflydev/finite-state-machine-support-for-laravel",
-    "type": "library",
     "license": "MIT",
+    "type": "library",
     "require": {
         "php": "^8.1",
         "dflydev/finite-state-machine": "^0@dev"
+    },
+    "require-dev": {
+        "dflydev/php-coding-standards": "dev-main",
+        "ergebnis/composer-normalize": "^2.31",
+        "ergebnis/license": "^2.1",
+        "nunomaduro/larastan": "^2.5",
+        "orchestra/testbench": "^8.0",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
             "Dflydev\\FiniteStateMachine\\SupportForLaravel\\": "src/"
         }
     },
+    "config": {
+        "allow-plugins": {
+            "ergebnis/composer-normalize": true
+        },
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
     "extra": {
         "branch-alias": {
             "dev-main": "0.x-dev"
         }
     },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "^3.15.1",
-        "phpstan/phpstan": "^1.10",
-        "orchestra/testbench": "^8.0",
-        "nunomaduro/larastan": "^2.5"
+    "scripts": {
+        "style:check": "@php ./vendor/bin/php-cs-fixer fix --dry-run",
+        "style:fix": "@php ./vendor/bin/php-cs-fixer fix"
     }
 }
