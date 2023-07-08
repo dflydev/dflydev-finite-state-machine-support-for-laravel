@@ -10,17 +10,24 @@ use Throwable;
 
 trait SingleFiniteStateMachineBehavior
 {
-    private FiniteStateMachine $finiteStateMachine;
+    /**
+     * @var array<string,FiniteStateMachine>
+     */
+    private static array $finiteStateMachines;
+
+    abstract protected function getFiniteStateMachineDiscriminator(): string;
 
     private function getFiniteStateMachine(?FiniteStateMachineFactory $finiteStateMachineFactory = null): FiniteStateMachine
     {
-        if (isset($this->finiteStateMachine)) {
-            return $this->finiteStateMachine;
+        $key = self::class.':'.spl_object_id($this).':'.$this->getFiniteStateMachineDiscriminator();
+
+        if (isset(self::$finiteStateMachines[$key])) {
+            return self::$finiteStateMachines[$key];
         }
 
         $finiteStateMachineFactory = $finiteStateMachineFactory ?? app(FiniteStateMachineFactory::class);
 
-        return $this->finiteStateMachine = $finiteStateMachineFactory->build($this);
+        return self::$finiteStateMachines[$key] = $finiteStateMachineFactory->build($this);
     }
 
     private function assertCanTransition(string $transition): void
